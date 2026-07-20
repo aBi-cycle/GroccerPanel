@@ -12,5 +12,5 @@
     </padding>
 
     <Label text="Welcome to Groccer Panel!"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <Button text="Login" onAction="#onLogin"/>
 </VBox>
