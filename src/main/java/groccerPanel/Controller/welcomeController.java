@@ -1,9 +1,9 @@
-package groccerPanel;
+package groccerPanel.Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class welcomeController {
     @FXML
     private Label welcomeText;
 
