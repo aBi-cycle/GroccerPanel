@@ -6,11 +6,11 @@
 
 <?import javafx.scene.control.Button?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="groccerPanel.Controller.welcomeController">
+      fx:controller="grocerPanel.Controller.welcomeController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label text="Welcome to Groccer Panel!"/>
+    <Label text="Welcome to Grocer Panel!"/>
     <Button text="Login" onAction="#onLogin"/>
 </VBox>

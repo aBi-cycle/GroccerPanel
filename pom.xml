@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.utsa.cs3443</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>GrocerPanel</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>demo</name>
 

@@ -1,6 +1,6 @@
-package groccerPanel;
+package grocerPanel;
 
-import groccerPanel.Model.WelcomeModel;
+import grocerPanel.Model.WelcomeModel;
 import javafx.application.Application;
 
 public class Launcher {

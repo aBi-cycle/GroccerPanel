@@ -1,4 +1,4 @@
-package groccerPanel.Controller;
+package grocerPanel.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +26,7 @@ public class loginController {
 
     @FXML
     void onCancel(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/groccerPanel/welcome-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/welcome-view.fxml"));
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(loader.load());
         stage.setTitle("Hello!");
