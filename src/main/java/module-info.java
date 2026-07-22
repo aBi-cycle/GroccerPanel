@@ -2,6 +2,7 @@ module grocerPanel {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires java.sql;
 
 
     opens grocerPanel to javafx.fxml;
