@@ -73,4 +73,9 @@ public class loginController {
         }
     }
 
+    @FXML
+    public void initialize() {
+        GoButton.setDefaultButton(true);
+    }
+
 }
