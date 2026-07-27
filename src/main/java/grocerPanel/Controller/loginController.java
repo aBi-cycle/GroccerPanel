@@ -1,5 +1,8 @@
 package grocerPanel.Controller;
 
+import java.io.IOException;
+
+import grocerPanel.database.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class loginController {
 
@@ -37,42 +38,38 @@ public class loginController {
 
     @FXML
     void onGo(ActionEvent event) throws IOException {
-        String uname = unameTbox.getText();
+        String uname = unameTbox.getText().trim();
         String pwd = pwdTbox.getText();
         //System.out.println("uname: " + uname +"\npwd: "+pwd);
 
-        if (uname.equals("temp")){
-            if (pwd.equals("test")) {
-                //TEST LOGIN SUCCESS
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("LOGIN SUCCESS");
-                alert.setHeaderText(null);
-                alert.setContentText("Welcome " + uname + "!");
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/main-page.fxml"));
-                Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(loader.load());
-                stage.setScene(scene);
-                stage.show();
-
-                alert.showAndWait();
-
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("LOGIN FAILURE");
-                alert.setHeaderText(null);
-                alert.setContentText("Sorry " + uname + ". That's the wrong password");
-                alert.showAndWait();
-                pwdTbox.setText("");
-            }
-        } else {
+        if (UserDAO.authenticate(uname, pwd)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("LOGIN FAILURE");
+            alert.setTitle("Login Successful");
             alert.setHeaderText(null);
-            alert.setContentText("Sorry. That's the wrong username or password");
+            alert.setContentText("Welcome, " + uname + "!");
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/main-page.fxml"));
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+
             alert.showAndWait();
-            pwdTbox.setText("");
+
+            stage.setScene(scene);
+            stage.show();
+            stage.setTitle("GroccerPanel - Main Page");
+
+            
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login Failed");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid username or password.");
+            alert.showAndWait();
+            pwdTbox.clear();
+            unameTbox.clear();
         }
     }
 

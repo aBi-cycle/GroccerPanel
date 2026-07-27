@@ -5,7 +5,8 @@ VALUES
 (2,'managerSteve','wordpass987','Manager'),
 (3,'employeeMark','employee567','Employee'),
 (4,'employeeJohn','pass000word','Employee'),
-(5,'employeeCindy','pa55w0rd!!','Employee');
+(5,'employeeCindy','pa55w0rd!!','Employee'),
+(6,'temp', 'test', 'Employee');
 
 
 INSERT INTO sale
