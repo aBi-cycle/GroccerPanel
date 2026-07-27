@@ -57,7 +57,7 @@ public class OrderDAO {
     public static void updateOrder(Order order) {
 
         String sql = """
-            UPDATE order
+            UPDATE orders
             SET orderDate = ?,
                 customerName = ?,
                 totalAmount = ?,
