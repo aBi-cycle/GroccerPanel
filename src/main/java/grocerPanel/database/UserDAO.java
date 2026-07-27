@@ -1,5 +1,6 @@
 package grocerPanel.database;
 
+import grocerPanel.Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,10 +10,9 @@ public class UserDAO {
 
     private UserDAO() {}
 
-    public static boolean authenticate(String username, String password) {
-
+    public static User authenticate(String username, String password) {
         String sql = """
-                SELECT 1
+                SELECT userID, username, role
                 FROM user
                 WHERE username = ? AND password = ?
                 LIMIT 1
@@ -26,11 +26,17 @@ public class UserDAO {
 
             ResultSet rs = stmt.executeQuery();
 
-            return rs.next();
+            if (rs.next()) {
+                int id = rs.getInt("userID");
+                String name = rs.getString("username");
+                String role = rs.getString("role");
+                return new User(id, name, role);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+
+        return null;
     }
 }
