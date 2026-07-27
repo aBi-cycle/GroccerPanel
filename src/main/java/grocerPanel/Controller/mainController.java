@@ -72,6 +72,11 @@ public class mainController {
 
         productTable.setItems(ProductDAO.getAllProducts());
 
+        productTable.getSortOrder().add(nameColumn);
+        nameColumn.setSortType(TableColumn.SortType.ASCENDING);
+
+        productTable.sort();
+
         // Enables double-click editing for name column
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
