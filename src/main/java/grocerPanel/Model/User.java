@@ -9,11 +9,25 @@ import java.sql.SQLException;
 public class User {
     private int userID;
     private String username;
+    private String password;
     private String role;
 
     public User(int userID, String username, String role) {
         this.userID = userID;
         this.username = username;
+        this.role = role;
+    }
+
+    public User(int userID, String username, String password, String role) {
+        this.userID = userID;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
         this.role = role;
     }
 
@@ -23,6 +37,10 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getRole() {
@@ -60,5 +78,12 @@ public class User {
         }
 
         return null;
+    }
+
+    public void logout() {
+        this.userID = 0;
+        this.username = null;
+        this.password = null;
+        this.role = null;
     }
 }
