@@ -1,6 +1,7 @@
 package grocerPanel.Controller;
 
 import grocerPanel.Model.Product;
+import grocerPanel.Model.User;
 import grocerPanel.database.ProductDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -47,6 +48,18 @@ public class mainController {
     void onSearch() {
         String searchTerm = SearchBox.getText().trim();
         // Implement search functionality here
+    }
+
+    private User currentUser;
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+
+        boolean canEdit = !"Employee".equalsIgnoreCase(user.getRole());
+
+        // AddB.setDisable(!canEdit);
+        // EditB.setDisable(!canEdit);
+        // productTable.setEditable(canEdit);
     }
 
     @FXML
