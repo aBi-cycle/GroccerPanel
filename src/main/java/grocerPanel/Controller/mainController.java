@@ -1,15 +1,21 @@
 package grocerPanel.Controller;
 
+import java.io.IOException;
+
 import grocerPanel.Model.Product;
 import grocerPanel.Model.User;
 import grocerPanel.database.ProductDAO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
@@ -23,6 +29,9 @@ public class mainController {
 
     @FXML
     private Button SearchB;
+
+    @FXML
+    private Button OrderB;
 
     @FXML
     private TextField SearchBox;
@@ -45,9 +54,17 @@ public class mainController {
     @FXML
     private TableColumn<Product, Integer> quantityColumn;
 
-    void onSearch() {
-        String searchTerm = SearchBox.getText().trim();
-        // Implement search functionality here
+   @FXML
+    void onOrder(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/order-page.fxml"));
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+
+        orderController controller = loader.getController();
+        controller.setCurrentUser(currentUser);
+        stage.setScene(scene);
+        stage.setTitle("GrocerPanel - Orders");
+        stage.show();
     }
 
     private User currentUser;

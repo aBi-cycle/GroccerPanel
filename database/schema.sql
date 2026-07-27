@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS pricereduction (
 );
 
 
-CREATE TABLE IF NOT EXISTS "order" (
+CREATE TABLE IF NOT EXISTS orders (
     orderID INTEGER PRIMARY KEY,
     orderDate DATE,
     customerName TEXT,

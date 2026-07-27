@@ -11,29 +11,29 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grocerPanel.Controller.mainController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grocerPanel.Controller.orderController">
    <children>
       <VBox prefHeight="400.0" prefWidth="600.0">
          <children>
             <HBox alignment="CENTER" prefHeight="38.0" prefWidth="600.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GrocerPanel - Inventory" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GrocerPanel - Order" />
                </children>
             </HBox>
-            <TableView fx:id="productTable" prefHeight="357.0" prefWidth="600.0">
+            <TableView fx:id="orderTable" prefHeight="357.0" prefWidth="600.0">
                <columns>
                   <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                  <TableColumn fx:id="dateColumn" text="Date" prefWidth="150"/>
                   <TableColumn fx:id="nameColumn" text="Name" prefWidth="150"/>
-                  <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="150"/>
-                  <TableColumn fx:id="priceColumn" text="Price" prefWidth="80"/>
-                  <TableColumn fx:id="quantityColumn" text="Quantity" prefWidth="80"/>
+                  <TableColumn fx:id="amountColumn" text="Amount" prefWidth="80"/>
+                  <TableColumn fx:id="statusColumn" text="Status" prefWidth="80"/>
                </columns>
             </TableView>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="600.0">
                <children>
                   <Button mnemonicParsing="false" text="Add" />
                   <Button mnemonicParsing="false" text="Edit" />
-                  <Button fx:id="ordersButton" mnemonicParsing="false" text="Order" onAction="#onOrder" />
+                  <Button fx:id="productsButton" mnemonicParsing="false" text="Products" onAction="#onProduct" />
                   <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
                   <TextField />
                   <Button mnemonicParsing="false" text="Search" />
