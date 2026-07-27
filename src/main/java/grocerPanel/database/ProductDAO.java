@@ -1,6 +1,7 @@
 package grocerPanel.database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -57,5 +58,32 @@ public class ProductDAO {
 
 
         return products;
+    }
+
+    public static void updateProduct(Product product) {
+
+        String sql = """
+            UPDATE product
+            SET name = ?,
+                description = ?,
+                price = ?,
+                quantity = ?
+            WHERE productID = ?
+            """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setDouble(3, product.getPrice());
+            stmt.setInt(4, product.getQuantity());
+            stmt.setInt(5, product.getProductID());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

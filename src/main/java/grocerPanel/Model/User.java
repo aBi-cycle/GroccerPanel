@@ -1,11 +1,5 @@
 package grocerPanel.Model;
 
-import grocerPanel.database.DatabaseConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class User {
     private int userID;
     private String username;

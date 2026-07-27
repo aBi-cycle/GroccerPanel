@@ -2,6 +2,7 @@ package grocerPanel.Controller;
 
 import java.io.IOException;
 
+import grocerPanel.Model.User;
 import grocerPanel.database.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,9 +43,11 @@ public class loginController {
         String pwd = pwdTbox.getText();
         //System.out.println("uname: " + uname +"\npwd: "+pwd);
 
+        User user = UserDAO.authenticate(uname, pwd);
 
 
-        if (UserDAO.authenticate(uname, pwd)) {
+
+        if (user != null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Login Successful");
             alert.setHeaderText(null);
@@ -53,6 +56,9 @@ public class loginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/main-page.fxml"));
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(loader.load());
+
+            mainController controller = loader.getController();
+            controller.setCurrentUser(user);
 
             alert.showAndWait();
 
@@ -71,6 +77,11 @@ public class loginController {
             pwdTbox.clear();
             unameTbox.clear();
         }
+    }
+
+    @FXML
+    public void initialize() {
+        GoButton.setDefaultButton(true);
     }
 
 }

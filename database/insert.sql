@@ -39,7 +39,7 @@ VALUES
 (4, 0.25, 1);
 
 
-INSERT INTO "order"
+INSERT INTO orders
 (orderID, orderDate, customerName, totalAmount, status)
 VALUES
 (1, '2026-04-26', 'John Walker', 19.10, 'In Progress'),
