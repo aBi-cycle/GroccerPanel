@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Box?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grocerPanel.Controller.addInvController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add to Inventory" textAlignment="CENTER" />
+            <HBox alignment="CENTER" prefHeight="418.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="383.0" prefWidth="419.0">
+                     <children>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="300.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" />
+                              <TextField fx:id="IDfield" promptText="ID" />
+                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="300.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+                              <TextField fx:id="NameField" promptText="Name" />
+                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="300.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" />
+                              <TextField fx:id="PriceField" promptText="Price" />
+                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="300.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" />
+                              <TextField fx:id="QuantityField" promptText="Quantity" />
+                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="383.0" prefWidth="419.0">
+                     <children>
+                        <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fx:id="PictureView" fitHeight="200.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true" />
+                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
+                              <TextArea fx:id="DescriptionArea" prefHeight="149.0" prefWidth="200.0" promptText="Description" />
+                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
+                  <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAdd" text="Add" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

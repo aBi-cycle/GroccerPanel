@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -145,6 +142,47 @@ public class mainController {
         });
 
         
+    }
+
+    @FXML
+    void onEdit(ActionEvent event) throws IOException {
+
+        Product selected = productTable.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Selection");
+            alert.setHeaderText(null);
+            alert.setContentText("Select a product to edit.");
+            alert.showAndWait();
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/edit-inventory.fxml"));
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+
+        editInvController controller = loader.getController();
+        controller.setCurrentUser(currentUser);
+        controller.setProduct(selected);
+
+        stage.setScene(scene);
+        stage.setTitle("GrocerPanel - edit inventory");
+        stage.show();
+    }
+
+    @FXML
+    void onAdd(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/add-inventory.fxml"));
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+
+        addInvController controller = loader.getController();
+        controller.setCurrentUser(currentUser);
+
+        stage.setScene(scene);
+        stage.setTitle("GrocerPanel - add to inventory");
+        stage.show();
     }
 
 

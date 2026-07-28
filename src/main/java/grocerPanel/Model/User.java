@@ -49,35 +49,5 @@ public class User {
         return "Employee".equalsIgnoreCase(role);
     }
 
-    public static User login(String username, String password) {
-        String sql = "SELECT userID, username, role FROM user WHERE username = ? AND password = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    int id = rs.getInt("userID");
-                    String user = rs.getString("username");
-                    String role = rs.getString("role");
-                    return new User(id, user, role);
-                }
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Login error: " + e.getMessage());
-        }
-
-        return null;
-    }
-
-    public void logout() {
-        this.userID = 0;
-        this.username = null;
-        this.password = null;
-        this.role = null;
-    }
 }
