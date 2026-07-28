@@ -67,22 +67,28 @@ public class addInvController {
 
     @FXML
     void onAdd(ActionEvent event) throws IOException {
-        if (currentProduct == null) {
-            return;
-        }
-
+        String idText = IDfield.getText().trim();
         String name = NameField.getText().trim();
         String description = DescriptionArea.getText().trim();
         String priceText = PriceField.getText().trim();
         String quantityText = QuantityField.getText().trim();
 
-        if (name.isEmpty() || priceText.isEmpty() || quantityText.isEmpty()) {
-            showAlert("Missing Info", "Please fill in name, price, and quantity.");
+        if (idText.isEmpty() || name.isEmpty() || description.isEmpty()
+                || priceText.isEmpty() || quantityText.isEmpty()) {
+            showAlert("Missing Info", "Please fill in every field before adding.");
             return;
         }
 
+        int id;
         double price;
         int quantity;
+
+        try {
+            id = Integer.parseInt(idText);
+        } catch (NumberFormatException e) {
+            showAlert("Invalid Input", "ID must be a whole number.");
+            return;
+        }
 
         try {
             price = Double.parseDouble(priceText);
@@ -92,15 +98,21 @@ public class addInvController {
             return;
         }
 
-        currentProduct.setName(name);
-        currentProduct.setDescription(description);
-        currentProduct.setPrice(price);
-        currentProduct.setQuantity(quantity);
+        if (ProductDAO.productExists(id)) {
+            showAlert("Duplicate ID", "A product with ID " + id + " already exists. Choose a different ID.");
+            return;
+        }
 
-        ProductDAO.updateProduct(currentProduct);
+        // No image support yet - stored as an empty path placeholder
+        Product newProduct = new Product(id, name, description, price, quantity, "");
 
-        returnToMainPage(event);
+        if (ProductDAO.addProduct(newProduct)) {
+            returnToMainPage(event);
+        } else {
+            showAlert("Error", "Could not add the product to the database.");
+        }
     }
+
 
     private void returnToMainPage(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/main-page.fxml"));
@@ -111,7 +123,7 @@ public class addInvController {
         controller.setCurrentUser(currentUser);
 
         stage.setScene(scene);
-        stage.setTitle("GroccerPanel - Main Page");
+        stage.setTitle("GrocerPanel - Main Page");
         stage.show();
     }
 

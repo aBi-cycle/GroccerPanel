@@ -1,6 +1,7 @@
 package grocerPanel.Controller;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import grocerPanel.Model.Product;
 import grocerPanel.Model.User;
@@ -9,10 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 public class editInvController {
@@ -48,6 +46,26 @@ public class editInvController {
     private Button SaveButton;
     private Product currentProduct;
     private User currentUser;
+
+    @FXML
+    void onDelete(ActionEvent event) throws IOException {
+        if (currentProduct == null) {
+            return;
+        }
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Delete Product");
+        confirm.setHeaderText(null);
+        confirm.setContentText("Delete \"" + currentProduct.getName() + "\"? This cannot be undone.");
+
+        Optional<ButtonType> result = confirm.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            if (ProductDAO.deleteProduct(currentProduct.getProductID())) {
+                returnToMainPage(event);
+            } else {
+                showAlert("Error", "Could not delete the product.");
+            }
+        }
+    }
 
     public void setCurrentUser(User user) {
         this.currentUser = user;

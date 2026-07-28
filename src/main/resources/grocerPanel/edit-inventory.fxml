@@ -83,6 +83,8 @@
                <children>
                   <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
                   <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
+                  <Button fx:id="DeleteButton" mnemonicParsing="false" onAction="#onDelete" text="Delete" />
+                  <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
                   <Button fx:id="SaveButton" mnemonicParsing="false" onAction="#onSave" text="Save" />
                </children>
             </HBox>
