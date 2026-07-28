@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 
+import grocerPanel.Model.Discount;
 import grocerPanel.Model.Product;
 import grocerPanel.Model.User;
+import grocerPanel.database.DiscountDAO;
 import grocerPanel.database.ProductDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -33,7 +36,7 @@ public class editInvController {
     private TextArea DescriptionArea;
 
     @FXML
-    private TextField DiscountField;
+    private ComboBox<String> discountBox;
 
     @FXML
     private TextField IDfield;
@@ -120,6 +123,7 @@ public class editInvController {
         QuantityField.setText(String.valueOf(product.getQuantity()));
 
         loadProductImage(product.getProductID());
+        discountBox.setValue(DiscountDAO.getDiscountCodeForProduct(product.getProductID()));
     }
 
     @FXML
@@ -161,6 +165,7 @@ public class editInvController {
         currentProduct.setQuantity(quantity);
 
         ProductDAO.updateProduct(currentProduct);
+        DiscountDAO.assignDiscountToProduct(currentProduct.getProductID(), discountBox.getValue());
 
         returnToMainPage(event);
     }
@@ -184,6 +189,14 @@ public class editInvController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    public void initialize() {
+
+        for (Discount discount : DiscountDAO.getAllDiscounts()) {
+            discountBox.getItems().add(discount.getCode());
+        }
     }
 
 }

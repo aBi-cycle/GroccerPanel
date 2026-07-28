@@ -139,4 +139,70 @@ public class DiscountDAO {
             return false;
         }
     }
+
+    public static boolean assignDiscountToProduct(int productID, String code) {
+
+        String deleteSQL =
+            "DELETE FROM ProductDiscount WHERE productID = ?";
+
+        String insertSQL = """
+            INSERT INTO ProductDiscount (productID, discountID)
+            SELECT ?, discountID
+            FROM productDiscountType
+            WHERE code = ?
+            """;
+
+        try (Connection conn = DatabaseConnection.getConnection()) {
+
+            // Remove existing discount for this product
+            PreparedStatement delete = conn.prepareStatement(deleteSQL);
+            delete.setInt(1, productID);
+            delete.executeUpdate();
+
+            // If no discount selected, we're done
+            if (code == null || code.isBlank()) {
+                return true;
+            }
+
+            // Create the new relationship
+            PreparedStatement insert = conn.prepareStatement(insertSQL);
+            insert.setInt(1, productID);
+            insert.setString(2, code);
+            insert.executeUpdate();
+
+            return true;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public static String getDiscountCodeForProduct(int productID) {
+
+        String sql = """
+            SELECT code
+            FROM productDiscountType d
+            JOIN ProductDiscount pd
+                ON d.discountID = pd.discountID
+            WHERE pd.productID = ?
+            """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, productID);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("code");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
 }
