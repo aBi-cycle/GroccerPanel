@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS inventory (
 );
 
 
-CREATE TABLE Discount (
+CREATE TABLE IF NOT EXISTS productDiscountType (
     discountID INTEGER PRIMARY KEY AUTOINCREMENT,
     code TEXT UNIQUE NOT NULL,
     discountType TEXT NOT NULL,
@@ -34,12 +34,12 @@ CREATE TABLE Discount (
     expirationDate TEXT
 );
 
-CREATE TABLE ProductDiscount (
+CREATE TABLE IF NOT EXISTS ProductDiscount (
     productID INTEGER,
     discountID INTEGER,
     PRIMARY KEY (productID, discountID),
-    FOREIGN KEY (productID) REFERENCES Product(productID),
-    FOREIGN KEY (discountID) REFERENCES Discount(discountID)
+    FOREIGN KEY (productID) REFERENCES product(productID) ON DELETE CASCADE,
+    FOREIGN KEY (discountID) REFERENCES productDiscountType(discountID) ON DELETE CASCADE
 );
 
 

@@ -16,7 +16,7 @@ public class DiscountDAO {
 
         ObservableList<Discount> discounts = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM Discount";
+        String sql = "SELECT * FROM productDiscountType";
 
         try(Connection connection = DatabaseConnection.getConnection();
             Statement statement = connection.createStatement();
@@ -46,7 +46,7 @@ public class DiscountDAO {
     public static boolean addDiscount(String code, String type, double value, String expirationDate) {
 
         String sql = """
-            INSERT INTO Discount
+            INSERT INTO productDiscountType
             (code, discountType, discountValue, active, expirationDate)
             VALUES (?, ?, ?, 1, ?)
             """;
@@ -72,7 +72,7 @@ public class DiscountDAO {
     public static boolean updateDiscount(int discountID, String code, String type, double value, String expirationDate) {
 
         String sql = """
-            UPDATE Discount
+            UPDATE productDiscountType
             SET code = ?,
                 discountType = ?,
                 discountValue = ?,
@@ -109,7 +109,7 @@ public class DiscountDAO {
 
 
         String deleteDiscount =
-            "DELETE FROM Discount WHERE discountID = ?";
+            "DELETE FROM productDiscountType WHERE discountID = ?";
 
 
         try(Connection conn = DatabaseConnection.getConnection()) {
