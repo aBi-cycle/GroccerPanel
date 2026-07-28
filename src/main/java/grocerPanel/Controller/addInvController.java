@@ -48,6 +48,7 @@ public class addInvController {
         this.currentUser = user;
     }
 
+
     public void setProduct(Product product) {
         this.currentProduct = product;
 

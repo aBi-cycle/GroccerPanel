@@ -1,6 +1,7 @@
 package grocerPanel.Controller;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 import grocerPanel.Model.Product;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 public class editInvController {
@@ -47,6 +49,35 @@ public class editInvController {
     private Product currentProduct;
     private User currentUser;
 
+    private static final String IMAGE_BASE_PATH = "/grocerPanel/images/";
+    private static final String DEFAULT_IMAGE = "defaultImage.png";
+
+    private static final Map<Integer, String> PRODUCT_IMAGES = Map.of(
+            1, "egg.png",
+            2, "egg.png",
+            3, "breadLoaf.png",
+            4,"groundBeef.jpg",
+            5,"waterBottles.jpg",
+            6,"halloweenCandy.jpg",
+            7,"energyDrink.jpg"
+    );
+
+    private void loadProductImage(int productID) {
+        String fileName = PRODUCT_IMAGES.getOrDefault(productID, DEFAULT_IMAGE);
+        java.net.URL url = getClass().getResource(IMAGE_BASE_PATH + fileName);
+
+        if (url == null) {
+            // Filename in the map doesn't exist on disk - fall back to default
+            url = getClass().getResource(IMAGE_BASE_PATH + DEFAULT_IMAGE);
+        }
+
+        if (url != null) {
+            PictureView.setImage(new Image(url.toExternalForm()));
+        } else {
+            PictureView.setImage(null);
+        }
+    }
+
     @FXML
     void onDelete(ActionEvent event) throws IOException {
         if (currentProduct == null) {
@@ -81,6 +112,8 @@ public class editInvController {
         DescriptionArea.setText(product.getDescription());
         PriceField.setText(String.valueOf(product.getPrice()));
         QuantityField.setText(String.valueOf(product.getQuantity()));
+
+        loadProductImage(product.getProductID());
     }
 
     @FXML
