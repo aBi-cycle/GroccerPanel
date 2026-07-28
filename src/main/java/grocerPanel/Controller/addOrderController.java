@@ -1,5 +1,12 @@
 package grocerPanel.Controller;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import grocerPanel.Model.Order;
 import grocerPanel.Model.OrderItems;
 import grocerPanel.Model.Product;
@@ -11,16 +18,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class addOrderController {
 
@@ -151,7 +155,7 @@ public class addOrderController {
         int id = Integer.parseInt(IDfield.getText());
         double amount = Double.parseDouble(AmountField.getText());
 
-        Order newOrder = new Order(id, date, customer, amount, "Pending");
+        Order newOrder = new Order(id, date, customer, amount, "In Progress");
 
         if (!OrderDAO.addOrder(newOrder)) {
             showAlert("Error", "Could not create the order.");
