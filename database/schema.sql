@@ -50,3 +50,9 @@ CREATE TABLE IF NOT EXISTS orders (
     totalAmount REAL,
     status TEXT
 );
+
+
+CREATE TABLE IF NOT EXISTS discount (
+    discountCode TEXT PRIMARY KEY,
+    expirationDate DATE
+);

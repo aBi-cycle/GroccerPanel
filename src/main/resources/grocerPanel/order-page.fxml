@@ -31,8 +31,8 @@
             </TableView>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="600.0">
                <children>
-                  <Button mnemonicParsing="false" text="Add" />
-                  <Button mnemonicParsing="false" text="Edit" />
+                  <Button fx:id="AddB" mnemonicParsing="false" onAction="#onAdd" text="Add" />
+                  <Button fx:id="EditB" mnemonicParsing="false" onAction="#onEdit" text="Edit" />
                   <Button fx:id="productsButton" mnemonicParsing="false" text="Products" onAction="#onProduct" />
                   <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
                   <TextField fx:id="searchBox"/>

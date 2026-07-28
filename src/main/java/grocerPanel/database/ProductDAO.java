@@ -145,4 +145,21 @@ public class ProductDAO {
             return false;
         }
     }
+
+    public static boolean decrementQuantity(int productID, int amount) {
+        String sql = "UPDATE product SET quantity = MAX(quantity - ?, 0) WHERE productID = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, amount);
+            stmt.setInt(2, productID);
+            stmt.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

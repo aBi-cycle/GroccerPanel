@@ -58,9 +58,11 @@ public class DatabaseSetup {
 
             // Execute each command when semicolon appears
             if(line.endsWith(";")) {
-                Statement statement = connection.createStatement();
-                statement.execute(sql.toString());
-                statement.close();
+                try (Statement statement = connection.createStatement()) {
+                    statement.execute(sql.toString());
+                } catch (Exception e) {
+                    System.out.println("Skipped statement due to error: " + e.getMessage());
+                }
                 sql.setLength(0);
             }
         }
