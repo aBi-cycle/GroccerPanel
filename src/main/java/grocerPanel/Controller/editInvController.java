@@ -55,7 +55,7 @@ public class editInvController {
     private static final Map<Integer, String> PRODUCT_IMAGES = Map.of(
             1, "egg.png",
             2, "egg.png",
-            3, "breadLoaf.png",
+            3, "breadLoaf.jpg",
             4,"groundBeef.jpg",
             5,"waterBottles.jpg",
             6,"halloweenCandy.jpg",
