@@ -49,5 +49,10 @@ public class User {
         return "Employee".equalsIgnoreCase(role);
     }
 
-
+    public void logout() {
+        this.userID = 0;
+        this.username = null;
+        this.password = null;
+        this.role = null;
+    }
 }

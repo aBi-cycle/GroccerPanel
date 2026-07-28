@@ -5,6 +5,7 @@ import java.io.IOException;
 import grocerPanel.Model.Product;
 import grocerPanel.Model.User;
 import grocerPanel.database.ProductDAO;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,13 +26,19 @@ public class mainController {
     private Button EditB;
 
     @FXML
-    private Button SearchB;
+    private Button ordersButtton;
 
     @FXML
-    private Button OrderB;
+    private Button managerButton;
 
     @FXML
-    private TextField SearchBox;
+    private Button searchButton;
+
+    @FXML
+    private TextField searchBox;
+
+    @FXML
+    private FilteredList<Product> filteredProducts;
 
     @FXML
     private TableView<Product> productTable;
@@ -51,29 +58,60 @@ public class mainController {
     @FXML
     private TableColumn<Product, Integer> quantityColumn;
 
-   @FXML
-    void onOrder(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/order-page.fxml"));
+    @FXML
+    void onSearch(ActionEvent event) {
+
+        String searchText = searchBox.getText().toLowerCase();
+
+        filteredProducts.setPredicate(product -> {
+
+            // Show everything if search is empty
+            if(searchText.isEmpty()) {
+                return true;
+            }
+
+            return product.getName().toLowerCase().contains(searchText)
+                || product.getDescription().toLowerCase().contains(searchText)
+                || String.valueOf(product.getProductID()).contains(searchText);
+        });
+    }
+
+
+
+    @FXML
+        void onOrder(ActionEvent event) throws IOException {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/order-page.fxml"));
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+
+            orderController controller = loader.getController();
+            controller.setCurrentUser(currentUser);
+            stage.setScene(scene);
+            stage.setTitle("GrocerPanel - Orders");
+            stage.show();
+        }
+
+    @FXML
+    void onSettings(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/manager-view.fxml"));
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(loader.load());
 
-        orderController controller = loader.getController();
-        controller.setCurrentUser(currentUser);
         stage.setScene(scene);
-        stage.setTitle("GrocerPanel - Orders");
+        stage.setTitle("GrocerPanel - Manger Settings");
         stage.show();
     }
 
     private User currentUser;
 
+
     public void setCurrentUser(User user) {
         this.currentUser = user;
 
-        boolean canEdit = !"Employee".equalsIgnoreCase(user.getRole());
+        boolean isManager = "Manager".equalsIgnoreCase(user.getRole());
 
-        // AddB.setDisable(!canEdit);
-        // EditB.setDisable(!canEdit);
-        // productTable.setEditable(canEdit);
+        managerButton.setVisible(isManager);
+        managerButton.setDisable(!isManager);
     }
 
     @FXML
@@ -97,7 +135,9 @@ public class mainController {
             new PropertyValueFactory<>("quantity")
         );
 
-        productTable.setItems(ProductDAO.getAllProducts());
+        filteredProducts = new FilteredList<>(ProductDAO.getAllProducts(), p -> true);
+
+        productTable.setItems(filteredProducts);
 
         productTable.getSortOrder().add(nameColumn);
         nameColumn.setSortType(TableColumn.SortType.ASCENDING);

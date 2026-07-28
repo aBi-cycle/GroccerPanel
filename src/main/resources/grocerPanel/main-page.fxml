@@ -34,8 +34,9 @@
                   <Button fx:id="EditButton" mnemonicParsing="false" onAction="#onEdit" text="Edit" />
                   <Button fx:id="ordersButton" mnemonicParsing="false" onAction="#onOrder" text="Order" />
                   <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
-                  <TextField />
-                  <Button mnemonicParsing="false" text="Search" />
+                  <TextField fx:id="searchBox"/>
+                  <Button fx:id= "searchButton" mnemonicParsing="false" text="Search" onAction="#onSearch" />
+                  <Button fx:id="managerButton" mnemonicParsing="false" text="Manager/Settings" onAction="#onSettings" />
                   <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
                </children>
             </HBox>
