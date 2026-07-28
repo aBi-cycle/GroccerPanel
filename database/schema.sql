@@ -54,13 +54,13 @@ CREATE TABLE IF NOT EXISTS orders (
 CREATE TABLE IF NOT EXISTS order_items (
     orderID INTEGER NOT NULL,
     productID INTEGER NOT NULL,
+    productName TEXT,
+    price REAL,
     quantity INTEGER NOT NULL,
     PRIMARY KEY (orderID, productID),
-    FOREIGN KEY (orderID) REFERENCES orders(orderID),
-    FOREIGN KEY (productID) REFERENCES product(productID)
-    );
-
-CREATE TABLE IF NOT EXISTS discount (
-    discountCode TEXT PRIMARY KEY,
-    expirationDate DATE
+    FOREIGN KEY (orderID)
+        REFERENCES orders(orderID)
+        ON DELETE CASCADE,
+    FOREIGN KEY (productID)
+        REFERENCES product(productID)
 );

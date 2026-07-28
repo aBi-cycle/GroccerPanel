@@ -179,7 +179,7 @@ public class orderController {
 
         statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn(
             FXCollections.observableArrayList(
-                    "Pending",
+                    "In Progress",
                     "Completed",
                     "Cancelled"
                 )

@@ -65,15 +65,3 @@ VALUES
 (6,5),
 (7,6);
 
-
-INSERT OR IGNORE INTO discount
-(discountCode, expirationDate)
-VALUES
-(1, 1),
-(2, 1),
-(3, 2),
-(4, 3),
-(5, 4),
-(6, 5),
-(7, 6);
-

@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import grocerPanel.Model.Order;
+import grocerPanel.Model.OrderItems;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import grocerPanel.Model.OrderItems;
-import java.util.List;
 
 public class OrderDAO {
 
@@ -147,10 +147,9 @@ public class OrderDAO {
         ObservableList<OrderItems> items = FXCollections.observableArrayList();
 
         String sql = """
-            SELECT oi.productID, p.name, p.price, oi.quantity
-            FROM order_items oi
-            JOIN product p ON p.productID = oi.productID
-            WHERE oi.orderID = ?
+            SELECT productID, productName, price, quantity
+            FROM order_items
+            WHERE orderID = ?
             """;
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -162,7 +161,7 @@ public class OrderDAO {
                 while (rs.next()) {
                     items.add(new OrderItems(
                             rs.getInt("productID"),
-                            rs.getString("name"),
+                            rs.getString("productName"),
                             rs.getDouble("price"),
                             rs.getInt("quantity")
                     ));
@@ -177,25 +176,79 @@ public class OrderDAO {
     }
 
     public static void saveOrderItems(int orderID, List<OrderItems> items) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
 
-            try (PreparedStatement del = conn.prepareStatement("DELETE FROM order_items WHERE orderID = ?")) {
-                del.setInt(1, orderID);
-                del.executeUpdate();
-            }
+        String updateSQL = """
+            UPDATE order_items
+            SET quantity = ?
+            WHERE orderID = ? AND productID = ?
+            """;
 
-            try (PreparedStatement ins = conn.prepareStatement(
-                    "INSERT INTO order_items (orderID, productID, quantity) VALUES (?, ?, ?)")) {
-                for (OrderItems item : items) {
-                    ins.setInt(1, orderID);
-                    ins.setInt(2, item.getProductID());
-                    ins.setInt(3, item.getQuantity());
-                    ins.addBatch();
+
+        String insertSQL = """
+            INSERT INTO order_items
+            (orderID, productID, quantity)
+            VALUES (?, ?, ?)
+            """;
+
+
+        String deleteSQL = """
+            DELETE FROM order_items
+            WHERE orderID = ? AND productID = ?
+            """;
+
+
+        try(Connection connection = DatabaseConnection.getConnection()) {
+
+
+            // Get current database items
+            ObservableList<OrderItems> existingItems = getOrderItems(orderID);
+
+
+            // Delete items no longer selected
+            for(OrderItems oldItem : existingItems) {
+
+                boolean stillExists = items.stream().anyMatch(newItem ->newItem.getProductID() == oldItem.getProductID());
+
+
+                if(!stillExists) {
+                    PreparedStatement delete = connection.prepareStatement(deleteSQL);
+                    delete.setInt(1, orderID);
+                    delete.setInt(2, oldItem.getProductID());
+                    delete.executeUpdate();
                 }
-                ins.executeBatch();
             }
 
-        } catch (SQLException e) {
+
+
+            // Update existing or insert new
+            for(OrderItems item : items) {
+
+                boolean exists = existingItems.stream().anyMatch(oldItem ->oldItem.getProductID() == item.getProductID());
+
+                if(exists) {
+
+                    PreparedStatement update = connection.prepareStatement(updateSQL);
+
+                    update.setInt(1, item.getQuantity());
+                    update.setInt(2, orderID);
+                    update.setInt(3, item.getProductID());
+
+                    update.executeUpdate();
+
+                } else {
+
+                    PreparedStatement insert = connection.prepareStatement(insertSQL);
+
+                    insert.setInt(1, orderID);
+                    insert.setInt(2, item.getProductID());
+                    insert.setInt(3, item.getQuantity());
+
+                    insert.executeUpdate();
+                }
+            }
+
+
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }

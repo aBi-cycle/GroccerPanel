@@ -1,9 +1,17 @@
 package grocerPanel.Controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import grocerPanel.Model.Order;
 import grocerPanel.Model.OrderItems;
 import grocerPanel.Model.Product;
 import grocerPanel.Model.User;
+import grocerPanel.database.DiscountDAO;
 import grocerPanel.database.OrderDAO;
 import grocerPanel.database.ProductDAO;
 import javafx.collections.ObservableList;
@@ -11,16 +19,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public class editOrderController {
 
@@ -126,16 +133,18 @@ public class editOrderController {
         updateTotal();
     }
 
-    private void updateTotal() {
-        double total = 0;
-        for (Product product : itemListView.getItems()) {
-            Integer qty = selectedQuantities.get(product.getProductID());
-            if (qty != null) {
-                total += product.getPrice() * qty;
-            }
+private void updateTotal() {
+
+    double total = 0;
+    for (Product product : itemListView.getItems()) {
+        Integer qty = selectedQuantities.get(product.getProductID());
+        if (qty != null) {
+            double discountedPrice = DiscountDAO.getDiscountedPrice(product.getProductID(), product.getPrice());
+            total += discountedPrice * qty;
         }
-        AmountField.setText(String.format("%.2f", total));
     }
+    AmountField.setText(String.format("%.2f", total));
+}
 
     @FXML
     void onCancel(ActionEvent event) throws IOException {
@@ -167,9 +176,19 @@ public class editOrderController {
 
         List<OrderItems> items = new ArrayList<>();
         for (Product product : itemListView.getItems()) {
+
             Integer qty = selectedQuantities.get(product.getProductID());
+
             if (qty != null) {
-                items.add(new OrderItems(product.getProductID(), product.getName(), product.getPrice(), qty));
+
+                double discountedPrice = DiscountDAO.getDiscountedPrice(product.getProductID(), product.getPrice());
+
+                items.add(new OrderItems(
+                        product.getProductID(),
+                        product.getName(),
+                        discountedPrice,
+                        qty
+                ));
             }
         }
         OrderDAO.saveOrderItems(currentOrder.getOrderID(), items);

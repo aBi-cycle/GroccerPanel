@@ -205,4 +205,46 @@ public class DiscountDAO {
 
         return null;
     }
+
+    public static double getDiscountedPrice(int productID, double originalPrice) {
+        String sql = """
+            SELECT discountType, discountValue
+            FROM productDiscountType d
+            JOIN ProductDiscount pd
+                ON d.discountID = pd.discountID
+            WHERE pd.productID = ?
+            AND d.active = 1
+            """;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, productID);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                String type = rs.getString("discountType");
+                double value = rs.getDouble("discountValue");
+
+                if ("PERCENT".equalsIgnoreCase(type)) {
+                    return originalPrice - (originalPrice * (value / 100));
+                }
+
+                if ("FIXED".equalsIgnoreCase(type)) {
+                    return Math.max(0, originalPrice - value);
+                }
+
+                if ("FREE".equalsIgnoreCase(type)) {
+                    return 0.0;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return originalPrice;
+    }
 }
