@@ -34,6 +34,9 @@ public class mainController {
     private Button OrderB;
 
     @FXML
+    private Button managerButton;
+
+    @FXML
     private TextField SearchBox;
 
     @FXML
@@ -67,16 +70,27 @@ public class mainController {
         stage.show();
     }
 
+    @FXML
+    void onSettings(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/manager-view.fxml"));
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+
+        stage.setScene(scene);
+        stage.setTitle("GrocerPanel - Manger Settings");
+        stage.show();
+    }
+
     private User currentUser;
+
 
     public void setCurrentUser(User user) {
         this.currentUser = user;
 
-        boolean canEdit = !"Employee".equalsIgnoreCase(user.getRole());
+        boolean isManager = "Manager".equalsIgnoreCase(user.getRole());
 
-        // AddB.setDisable(!canEdit);
-        // EditB.setDisable(!canEdit);
-        // productTable.setEditable(canEdit);
+        managerButton.setVisible(isManager);
+        managerButton.setDisable(!isManager);
     }
 
     @FXML

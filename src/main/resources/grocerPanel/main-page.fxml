@@ -37,6 +37,7 @@
                   <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
                   <TextField />
                   <Button mnemonicParsing="false" text="Search" />
+                  <Button fx:id="managerButton" mnemonicParsing="false" text="Manager/Settings" onAction="#onSettings" />
                   <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
                </children>
             </HBox>

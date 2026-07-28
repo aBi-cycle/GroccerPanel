@@ -9,7 +9,7 @@ public class DatabaseConnection {
 
 
     private static final String URL =
-            "jdbc:sqlite:GroccerPanel/database/finalproject.db";
+            "jdbc:sqlite:database/finalproject.db";
 
     private DatabaseConnection() {
     }

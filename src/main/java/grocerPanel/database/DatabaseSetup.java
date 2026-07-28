@@ -9,10 +9,10 @@ import java.sql.Statement;
 public class DatabaseSetup {
 
     private static final String SCHEMA_FILE =
-            "GroccerPanel/database/schema.sql";
+            "database/schema.sql";
 
     private static final String INSERT_FILE =
-            "GroccerPanel/database/insert.sql";
+            "database/insert.sql";
 
 
     @SuppressWarnings("ConvertToTryWithResources")
