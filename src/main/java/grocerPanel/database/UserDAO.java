@@ -38,7 +38,7 @@ public class UserDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error retrieving products: " + e.getMessage());
         }
 
         return null;
@@ -56,7 +56,7 @@ public class UserDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error retrieving products: " + e.getMessage());
         }
 
         return 1;
@@ -80,7 +80,7 @@ public class UserDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error retrieving products: " + e.getMessage());
         }
 
         return users;
@@ -101,7 +101,7 @@ public class UserDAO {
             return true;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error retrieving products: " + e.getMessage());
             return false;
         }
     }
@@ -121,7 +121,7 @@ public class UserDAO {
             return true;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error retrieving products: " + e.getMessage());
             return false;
         }
     }
@@ -137,7 +137,7 @@ public class UserDAO {
             return true;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error retrieving products: " + e.getMessage());
             return false;
         }
     }

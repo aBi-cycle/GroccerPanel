@@ -30,8 +30,8 @@
             </TableView>
             <HBox alignment="CENTER" prefHeight="39.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="AddButton" mnemonicParsing="false" onAction="#onAdd" text="Add" />
-                  <Button fx:id="EditButton" mnemonicParsing="false" onAction="#onEdit" text="Edit" />
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAdd" text="Add" />
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEdit" text="Edit" />
                   <Button fx:id="ordersButton" mnemonicParsing="false" onAction="#onOrder" text="Order" />
                   <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
                   <TextField fx:id="searchBox"/>

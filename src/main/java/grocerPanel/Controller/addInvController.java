@@ -1,5 +1,7 @@
 package grocerPanel.Controller;
 
+import java.io.IOException;
+
 import grocerPanel.Model.Product;
 import grocerPanel.Model.User;
 import grocerPanel.database.ProductDAO;
@@ -14,8 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
+@SuppressWarnings("unused")
 public class addInvController {
 
     @FXML

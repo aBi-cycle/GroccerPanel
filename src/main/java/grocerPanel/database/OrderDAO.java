@@ -49,7 +49,7 @@ public class OrderDAO {
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error retrieving products: " + e.getMessage());
         }
 
 
@@ -79,7 +79,7 @@ public class OrderDAO {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Error retrieving products: " + e.getMessage());
         }
     }
 

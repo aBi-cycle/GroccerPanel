@@ -16,6 +16,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 
+@SuppressWarnings("unused")
 public class orderController {
 
     
@@ -52,7 +53,6 @@ public class orderController {
     @FXML
     private TableColumn<Order, String> statusColumn;
 
-    @FXML
     private FilteredList<Order> filteredOrders;
 
     @FXML

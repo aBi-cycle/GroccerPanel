@@ -1,5 +1,8 @@
 package grocerPanel.Controller;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import grocerPanel.Model.User;
 import grocerPanel.database.UserDAO;
 import javafx.event.ActionEvent;
@@ -15,9 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.Optional;
-
+@SuppressWarnings("unused")
 public class ManagerController {
 
     @FXML

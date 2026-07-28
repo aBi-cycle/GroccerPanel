@@ -11,4 +11,5 @@ module grocerPanel {
     opens grocerPanel.Controller to javafx.fxml;
     exports grocerPanel.Model;
     opens grocerPanel.Model to javafx.fxml;
+    
 }
