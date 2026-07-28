@@ -37,6 +37,7 @@
                   <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
                   <TextField fx:id="searchBox"/>
                   <Button fx:id= "searchButton" mnemonicParsing="false" text="Search" onAction="#onSearch" />
+                  <Button fx:id="discountButton" mnemonicParsing="false" text="Discounts" onAction="#onDiscount" />
                   <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
                </children>
             </HBox>

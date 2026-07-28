@@ -42,6 +42,11 @@ public class ManagerController {
     @FXML
     private ChoiceBox<String> roleBox;
 
+    private User currentUser;
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
     @FXML
     public void initialize() {
         roleBox.getItems().addAll("Manager", "Employee");
@@ -148,6 +153,8 @@ public class ManagerController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/main-page.fxml"));
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(loader.load());
+        mainController controller = loader.getController();
+        controller.setCurrentUser(currentUser);
         stage.setScene(scene);
         stage.show();
     }

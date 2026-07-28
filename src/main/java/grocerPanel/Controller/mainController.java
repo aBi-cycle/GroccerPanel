@@ -37,6 +37,9 @@ public class mainController {
     private Button managerButton;
 
     @FXML
+    private Button discountButton;
+
+    @FXML
     private Button searchButton;
 
     @FXML
@@ -99,9 +102,23 @@ public class mainController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/manager-view.fxml"));
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(loader.load());
+        ManagerController controller = loader.getController();
+        controller.setCurrentUser(currentUser);
 
         stage.setScene(scene);
         stage.setTitle("GrocerPanel - Manger Settings");
+        stage.show();
+    }
+
+    @FXML
+    void onDiscount(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/discount-page.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load());
+
+        stage.setScene(scene);
+        stage.setTitle("GrocerPanel - Discount Manager");
         stage.show();
     }
 
@@ -115,6 +132,8 @@ public class mainController {
 
         managerButton.setVisible(isManager);
         managerButton.setDisable(!isManager);
+        discountButton.setVisible(isManager);
+        discountButton.setDisable(!isManager);
     }
 
     @FXML

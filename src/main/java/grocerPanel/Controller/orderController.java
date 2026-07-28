@@ -5,6 +5,7 @@ import java.io.IOException;
 import grocerPanel.Model.Order;
 import grocerPanel.Model.User;
 import grocerPanel.database.OrderDAO;
+import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -37,6 +39,9 @@ public class orderController {
 
     @FXML
     private Button ProductB;
+
+    @FXML
+    private Button discountButton;
 
     @FXML
     private TableView<Order> orderTable;
@@ -89,16 +94,30 @@ public class orderController {
         stage.show();
     }
 
+    @FXML
+    void onDiscount(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/discount-page.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(loader.load());
+
+        stage.setScene(scene);
+        stage.setTitle("GrocerPanel - Discount Manager");
+        stage.show();
+    }
+
     private User currentUser;
 
     public void setCurrentUser(User user) {
         this.currentUser = user;
 
-        boolean canEdit = !"Employee".equalsIgnoreCase(user.getRole());
+        boolean isManager = "Manager".equalsIgnoreCase(user.getRole());
 
-        // AddB.setDisable(!canEdit);
-        // EditB.setDisable(!canEdit);
-        // orderTable.setEditable(canEdit);
+        discountButton.setVisible(isManager);
+        discountButton.setDisable(!isManager);
+        dateColumn.setEditable(isManager);
+        nameColumn.setEditable(isManager);
+        amountColumn.setEditable(isManager);
     }
 
      @FXML
@@ -155,13 +174,22 @@ public class orderController {
             orderTable.refresh(); // Refresh the table to show updated value
         });
 
-        statusColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        statusColumn.setEditable(true);
+
+        statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn(
+            FXCollections.observableArrayList(
+                    "In Progress",
+                    "Completed",
+                    "Cancelled"
+                )
+            )
+        );
 
         statusColumn.setOnEditCommit(event -> {
             Order order = event.getRowValue();
             order.setStatus(event.getNewValue());
             OrderDAO.updateOrder(order);
-            orderTable.refresh(); // Refresh the table to show updated value
+            orderTable.refresh();
         });
 
         
