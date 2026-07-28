@@ -1,4 +1,4 @@
-INSERT INTO user
+INSERT OR IGNORE INTO user
 (userID, username, password, role)
 VALUES
 (1,'managerBob','password123','Manager'),
@@ -9,7 +9,7 @@ VALUES
 (6,'temp', 'test', 'Employee');
 
 
-INSERT INTO sale
+INSERT OR IGNORE INTO sale
 (saleID, saleName)
 VALUES
 (1, 'DamagedProduct'),
@@ -18,7 +18,7 @@ VALUES
 (4, 'EmployeeDiscount');
 
 
-INSERT INTO product
+INSERT OR IGNORE INTO product
 (productID, name, description, price, quantity, ImagePath, saleID)
 VALUES
 (1, 'Dozen Eggs', '1 Dozen Large Brown Eggs', 2.66, 12, '', 1),
@@ -30,7 +30,7 @@ VALUES
 (7, 'Energy Drink', 'Can of Energy Drink', 2.45, 1, '', 3);
 
 
-INSERT INTO pricereduction
+INSERT OR IGNORE INTO pricereduction
 (reductionID, reductionPercent, active)
 VALUES
 (1, 1.00, 1),
@@ -39,7 +39,7 @@ VALUES
 (4, 0.25, 1);
 
 
-INSERT INTO orders
+INSERT OR IGNORE INTO orders
 (orderID, orderDate, customerName, totalAmount, status)
 VALUES
 (1, '2026-04-26', 'John Walker', 19.10, 'In Progress'),
@@ -48,7 +48,7 @@ VALUES
 (4, '2026-04-28', 'Allen Jacobs', 124.67, 'In Progress');
 
 
-INSERT INTO inventory
+INSERT OR IGNORE INTO inventory
 (inventoryID, totalProducts)
 VALUES
 (1, 108),
@@ -60,7 +60,7 @@ VALUES
 (7, 10);
 
 
-INSERT INTO discount
+INSERT OR IGNORE INTO discount
 (discountCode, expirationDate)
 VALUES
 ('001', '2026-04-25'),

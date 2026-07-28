@@ -10,10 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -165,6 +162,46 @@ public class orderController {
         });
 
         
+    }
+
+    @FXML
+    void onAdd(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/add-order.fxml"));
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+
+        addOrderController controller = loader.getController();
+        controller.setCurrentUser(currentUser);
+
+        stage.setScene(scene);
+        stage.setTitle("GrocerPanel - Add Order");
+        stage.show();
+    }
+
+    @FXML
+    void onEdit(ActionEvent event) throws IOException {
+        Order selected = orderTable.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Selection");
+            alert.setHeaderText(null);
+            alert.setContentText("Select an order to edit.");
+            alert.showAndWait();
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/grocerPanel/edit-order.fxml"));
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load());
+
+        editOrderController controller = loader.getController();
+        controller.setCurrentUser(currentUser);
+        controller.setOrder(selected);
+
+        stage.setScene(scene);
+        stage.setTitle("GrocerPanel - Edit Order");
+        stage.show();
     }
 
 }
