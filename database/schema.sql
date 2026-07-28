@@ -51,6 +51,14 @@ CREATE TABLE IF NOT EXISTS orders (
     status TEXT
 );
 
+CREATE TABLE IF NOT EXISTS order_items (
+    orderID INTEGER NOT NULL,
+    productID INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    PRIMARY KEY (orderID, productID),
+    FOREIGN KEY (orderID) REFERENCES orders(orderID),
+    FOREIGN KEY (productID) REFERENCES product(productID)
+    );
 
 CREATE TABLE IF NOT EXISTS discount (
     discountCode TEXT PRIMARY KEY,

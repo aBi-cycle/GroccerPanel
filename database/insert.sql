@@ -11,7 +11,7 @@ VALUES
 
 
 
-INSERT INTO product
+INSERT OR IGNORE INTO product
 (productID, name, description, price, quantity, ImagePath)
 VALUES
 (1, 'Dozen Eggs', '1 Dozen Large Brown Eggs', 2.66, 12, ''),
@@ -44,7 +44,7 @@ VALUES
 (6, 5),
 (7, 10);
 
-INSERT INTO productDiscountType
+INSERT OR IGNORE INTO productDiscountType
 (discountID, code, discountType, discountValue, active, expirationDate)
 VALUES
 (1,'SAVE10','Percent',10,1,'2026-12-31'),
@@ -54,7 +54,7 @@ VALUES
 (5,'CANDY25','Percent',25,1,'2026-10-31'),
 (6,'ENERGY5','Fixed',0.50,1,'2026-11-30');
 
-INSERT INTO ProductDiscount
+INSERT OR IGNORE INTO ProductDiscount
 (productID, discountID)
 VALUES
 (1,1),
@@ -66,7 +66,7 @@ VALUES
 (7,6);
 
 
-INSERT INTO discount
+INSERT OR IGNORE INTO discount
 (discountCode, expirationDate)
 VALUES
 (1, 1),
