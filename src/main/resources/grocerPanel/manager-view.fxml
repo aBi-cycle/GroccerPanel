@@ -4,36 +4,148 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grocerPanel.Controller.ManagerController">
-    <padding>
-        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
-    </padding>
+<BorderPane prefHeight="620.0"
+            prefWidth="900.0"
+            styleClass="app-root"
+            stylesheets="@style.css"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="grocerPanel.Controller.ManagerController">
 
-    <Label text="Manager Page - Users"/>
-    <TableView fx:id="userTable" prefHeight="200.0">
-        <columns>
-            <TableColumn fx:id="idColumn" text="ID" prefWidth="50.0"/>
-            <TableColumn fx:id="usernameColumn" text="Username" prefWidth="180.0"/>
-            <TableColumn fx:id="roleColumn" text="Role" prefWidth="120.0"/>
-        </columns>
-    </TableView>
+    <top>
+        <VBox spacing="5.0"
+              styleClass="page-header">
 
-    <HBox spacing="10.0">
-        <TextField fx:id="usernameField" promptText="Username"/>
-        <TextField fx:id="passwordField" promptText="Password"/>
-        <ChoiceBox fx:id="roleBox"/>
-    </HBox>
+            <Label text="User Management"
+                   styleClass="page-title"/>
 
-    <HBox spacing="10.0">
-        <Button text="Add" onAction="#onAddUser"/>
-        <Button text="Update" onAction="#onUpdateUser"/>
-        <Button text="Delete" onAction="#onDeleteUser"/>
-        <Button text="Cancel" onAction="#onCancel"/>
-    </HBox>
-</VBox>
+            <Label text="Create, update, and remove employee and manager accounts."
+                   styleClass="page-subtitle"/>
+
+        </VBox>
+    </top>
+
+    <center>
+        <HBox spacing="20.0">
+
+            <padding>
+                <Insets top="24.0"
+                        right="24.0"
+                        bottom="20.0"
+                        left="24.0"/>
+            </padding>
+
+            <VBox spacing="12.0"
+                  HBox.hgrow="ALWAYS"
+                  styleClass="card">
+
+                <Label text="Current Users"
+                       styleClass="section-title"/>
+
+                <TableView fx:id="userTable"
+                           VBox.vgrow="ALWAYS">
+
+                    <columns>
+
+                        <TableColumn fx:id="idColumn"
+                                     text="ID"
+                                     prefWidth="90.0"/>
+
+                        <TableColumn fx:id="usernameColumn"
+                                     text="Username"
+                                     prefWidth="230.0"/>
+
+                        <TableColumn fx:id="roleColumn"
+                                     text="Role"
+                                     prefWidth="180.0"/>
+
+                    </columns>
+
+                </TableView>
+
+            </VBox>
+
+            <VBox spacing="14.0"
+                  prefWidth="320.0"
+                  styleClass="card">
+
+                <Label text="User Details"
+                       styleClass="section-title"/>
+
+                <Label text="Select a user from the table to edit an existing account, or enter new information to create one."
+                       styleClass="helper-text"
+                       wrapText="true"/>
+
+                <VBox spacing="6.0">
+                    <Label text="Username"
+                           styleClass="field-label"/>
+
+                    <TextField fx:id="usernameField"
+                               promptText="Username"
+                               prefHeight="40.0"/>
+                </VBox>
+
+                <VBox spacing="6.0">
+                    <Label text="Password"
+                           styleClass="field-label"/>
+
+                    <PasswordField fx:id="passwordField"
+                                   promptText="Password"
+                                   prefHeight="40.0"/>
+                </VBox>
+
+                <VBox spacing="6.0">
+                    <Label text="Role"
+                           styleClass="field-label"/>
+
+                    <ChoiceBox fx:id="roleBox"
+                               prefHeight="40.0"
+                               maxWidth="Infinity"/>
+                </VBox>
+
+                <VBox VBox.vgrow="ALWAYS"/>
+
+                <Button text="Add User"
+                        prefHeight="40.0"
+                        maxWidth="Infinity"
+                        styleClass="button-primary"
+                        onAction="#onAddUser"/>
+
+                <Button text="Update User"
+                        prefHeight="40.0"
+                        maxWidth="Infinity"
+                        styleClass="button-secondary"
+                        onAction="#onUpdateUser"/>
+
+                <Button text="Delete User"
+                        prefHeight="40.0"
+                        maxWidth="Infinity"
+                        styleClass="button-danger"
+                        onAction="#onDeleteUser"/>
+
+            </VBox>
+
+        </HBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT"
+              styleClass="page-footer">
+
+            <Button text="Back to Inventory"
+                    prefWidth="150.0"
+                    styleClass="button-ghost"
+                    onAction="#onCancel"/>
+
+        </HBox>
+    </bottom>
+
+</BorderPane>

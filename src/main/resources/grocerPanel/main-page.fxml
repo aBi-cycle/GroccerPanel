@@ -1,47 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Box?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grocerPanel.Controller.mainController">
-   <children>
-      <VBox prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="600.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GrocerPanel - Inventory" />
-               </children>
-            </HBox>
-            <TableView fx:id="productTable" prefHeight="357.0" prefWidth="600.0">
-               <columns>
-                  <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
-                  <TableColumn fx:id="nameColumn" prefWidth="150" text="Name" />
-                  <TableColumn fx:id="descriptionColumn" prefWidth="150" text="Description" />
-                  <TableColumn fx:id="priceColumn" prefWidth="80" text="Price" />
-                  <TableColumn fx:id="quantityColumn" prefWidth="80" text="Quantity" />
-               </columns>
-            </TableView>
-            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="600.0">
-               <children>
-                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAdd" text="Add" />
-                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEdit" text="Edit" />
-                  <Button fx:id="ordersButton" mnemonicParsing="false" onAction="#onOrder" text="Order" />
-                  <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
-                  <TextField fx:id="searchBox"/>
-                  <Button fx:id= "searchButton" mnemonicParsing="false" text="Search" onAction="#onSearch" />
-                  <Button fx:id="discountButton" mnemonicParsing="false" text="Discounts" onAction="#onDiscount" />
-                  <Button fx:id="managerButton" mnemonicParsing="false" text="User Settings" onAction="#onSettings" />
-                  <Box depth="10.0" height="10.0" opacity="0.0" width="10.0" />
-               </children>
-            </HBox>
-         </children>
+<BorderPane prefHeight="650.0"
+            prefWidth="1050.0"
+            styleClass="app-root"
+            stylesheets="@style.css"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="grocerPanel.Controller.mainController">
+
+   <top>
+      <VBox spacing="5.0"
+            styleClass="page-header">
+
+         <Label text="GrocerPanel"
+                styleClass="page-title"/>
+
+         <Label text="Inventory Management"
+                styleClass="section-title"/>
+
+         <Label text="Browse, search, update, and manage products available in the store."
+                styleClass="page-subtitle"/>
+
       </VBox>
-   </children>
-</AnchorPane>
+   </top>
+
+   <center>
+      <VBox spacing="14.0">
+         <padding>
+            <Insets top="20.0"
+                    right="24.0"
+                    bottom="18.0"
+                    left="24.0"/>
+         </padding>
+
+         <HBox spacing="10.0"
+               alignment="CENTER_LEFT">
+
+            <Label text="Search Products"
+                   styleClass="field-label"/>
+
+            <TextField fx:id="searchBox"
+                       promptText="Search by ID, name, or description..."
+                       prefHeight="38.0"
+                       HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="searchButton"
+                    text="Search"
+                    prefHeight="38.0"
+                    styleClass="button-primary"
+                    onAction="#onSearch"/>
+
+         </HBox>
+
+         <TableView fx:id="productTable"
+                    VBox.vgrow="ALWAYS">
+
+            <columns>
+
+               <TableColumn fx:id="idColumn"
+                            text="ID"
+                            prefWidth="65.0"/>
+
+               <TableColumn fx:id="nameColumn"
+                            text="Product"
+                            prefWidth="180.0"/>
+
+               <TableColumn fx:id="descriptionColumn"
+                            text="Description"
+                            prefWidth="390.0"
+                            minWidth="250.0"/>
+
+               <TableColumn fx:id="priceColumn"
+                            text="Price"
+                            prefWidth="110.0"/>
+
+               <TableColumn fx:id="quantityColumn"
+                            text="Stock"
+                            prefWidth="110.0"/>
+
+            </columns>
+
+         </TableView>
+
+      </VBox>
+   </center>
+
+   <bottom>
+      <HBox spacing="10.0"
+            alignment="CENTER_LEFT"
+            styleClass="page-footer">
+
+         <Button fx:id="addButton"
+                 text="+ Add Product"
+                 styleClass="button-primary"
+                 onAction="#onAdd"/>
+
+         <Button fx:id="editButton"
+                 text="Edit Product"
+                 styleClass="button-secondary"
+                 onAction="#onEdit"/>
+
+         <Region HBox.hgrow="ALWAYS"/>
+
+         <Button fx:id="ordersButtton"
+                 text="Orders"
+                 styleClass="button-nav"
+                 onAction="#onOrder"/>
+
+         <Button fx:id="discountButton"
+                 text="Discount Manager"
+                 styleClass="button-gold"
+                 onAction="#onDiscount"/>
+
+         <Button fx:id="managerButton"
+                 text="User Settings"
+                 styleClass="button-nav"
+                 onAction="#onSettings"/>
+
+      </HBox>
+   </bottom>
+
+</BorderPane>

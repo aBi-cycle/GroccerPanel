@@ -1,0 +1,339 @@
+/* =========================================================
+   GROCER PANEL - WARM UI THEME
+   ========================================================= */
+
+.root {
+    -fx-font-family: "Avenir Next";
+    -fx-background-color: #F6F1E7;
+    -fx-focus-color: #6A8F5B;
+    -fx-faint-focus-color: rgba(106, 143, 91, 0.18);
+}
+
+/* =========================================================
+   ROOT / PAGE STRUCTURE
+   ========================================================= */
+
+.app-root {
+    -fx-background-color: #F6F1E7;
+}
+
+.page-header {
+    -fx-background-color: #FFFDF8;
+    -fx-border-color: transparent transparent #E5D9C8 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 24 28 20 28;
+}
+
+.page-footer {
+    -fx-background-color: #FFFDF8;
+    -fx-border-color: #E5D9C8 transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 14 24 18 24;
+}
+
+.page-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5A4634;
+}
+
+.page-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7B6A58;
+}
+
+.section-title {
+    -fx-font-family: "Georgia";
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5A4634;
+}
+
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6D5845;
+}
+
+.helper-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: #8B7965;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+    -fx-background-color: #FFFDF8;
+    -fx-background-radius: 16;
+    -fx-border-color: #E4D8C7;
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-padding: 22;
+}
+
+.card-soft {
+    -fx-background-color: #FBF6ED;
+    -fx-background-radius: 14;
+    -fx-border-color: #E6DACA;
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-padding: 18;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.button {
+    -fx-font-family: "Avenir Next";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 9 18 9 18;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-opacity: 0.92;
+}
+
+.button:pressed {
+    -fx-opacity: 0.82;
+}
+
+.button-primary {
+    -fx-background-color: #6A8F5B;
+}
+
+.button-primary:hover {
+    -fx-background-color: #5B7F4D;
+}
+
+.button-secondary {
+    -fx-background-color: #8A7662;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #756350;
+}
+
+.button-gold {
+    -fx-background-color: #C99538;
+}
+
+.button-gold:hover {
+    -fx-background-color: #B6812F;
+}
+
+.button-danger {
+    -fx-background-color: #B65C4B;
+}
+
+.button-danger:hover {
+    -fx-background-color: #9E4D3F;
+}
+
+.button-ghost {
+    -fx-background-color: #EFE7DA;
+    -fx-text-fill: #5E4B39;
+}
+
+.button-ghost:hover {
+    -fx-background-color: #E4D9C8;
+}
+
+.button-nav {
+    -fx-background-color: #E8E0D4;
+    -fx-text-fill: #5D4A38;
+}
+
+.button-nav:hover {
+    -fx-background-color: #DCD0BF;
+}
+
+/* =========================================================
+   TEXT INPUTS
+   ========================================================= */
+
+.text-field,
+.password-field,
+.combo-box,
+.choice-box {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-border-color: #D8CAB8;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-padding: 8 11 8 11;
+    -fx-font-size: 13px;
+    -fx-text-fill: #5A4634;
+    -fx-prompt-text-fill: #A89784;
+}
+
+.text-field:focused,
+.password-field:focused,
+.combo-box:focused,
+.choice-box:focused {
+    -fx-border-color: #6A8F5B;
+    -fx-border-width: 2;
+}
+
+.text-area {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-border-color: #D8CAB8;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-font-size: 13px;
+    -fx-text-fill: #5A4634;
+    -fx-prompt-text-fill: #A89784;
+}
+
+.text-area:focused {
+    -fx-border-color: #6A8F5B;
+    -fx-border-width: 2;
+}
+
+.text-area .content {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+.table-view {
+    -fx-background-color: #FFFDF8;
+    -fx-background-radius: 12;
+    -fx-border-color: #E1D5C4;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #EDE4D6;
+    -fx-background-radius: 12 12 0 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #D8CAB8 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10 8 10 8;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #5A4634;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.table-row-cell {
+    -fx-background-color: #FFFDF8;
+    -fx-border-color: transparent transparent #F0E8DD transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #FCF7EF;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #DDE9D6;
+    -fx-text-background-color: #4E6B43;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #F2EBDD;
+}
+
+.table-cell {
+    -fx-text-fill: #5A4634;
+    -fx-font-size: 12px;
+    -fx-padding: 9 8 9 8;
+}
+
+/* =========================================================
+   LIST VIEWS
+   ========================================================= */
+
+.list-view {
+    -fx-background-color: #FFFDF8;
+    -fx-background-radius: 12;
+    -fx-border-color: #E1D5C4;
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+}
+
+.list-cell {
+    -fx-background-color: #FFFDF8;
+    -fx-text-fill: #5A4634;
+    -fx-padding: 10 12 10 12;
+    -fx-border-color: transparent transparent #F0E8DD transparent;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #F5EEDF;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #DDE9D6;
+    -fx-text-fill: #4E6B43;
+}
+
+/* =========================================================
+   IMAGES
+   ========================================================= */
+
+.image-view {
+    -fx-background-color: #F1E9DC;
+    -fx-background-radius: 14;
+}
+
+/* =========================================================
+   SEPARATORS
+   ========================================================= */
+
+.separator .line {
+    -fx-border-color: #E1D5C4;
+}
+
+/* =========================================================
+   CHECKBOXES
+   ========================================================= */
+
+.check-box {
+    -fx-text-fill: #5A4634;
+    -fx-font-size: 13px;
+}
+
+.check-box .box {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CDBDA8;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #6A8F5B;
+    -fx-border-color: #6A8F5B;
+}
+
+/* =========================================================
+   DISABLED CONTROLS
+   ========================================================= */
+
+.text-field:disabled,
+.password-field:disabled,
+.button:disabled,
+.combo-box:disabled,
+.choice-box:disabled {
+    -fx-opacity: 0.65;
+}

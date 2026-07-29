@@ -1,82 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Box?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grocerPanel.Controller.addOrderController">
-   <children>
-      <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add Order" textAlignment="CENTER" />
-            <HBox alignment="CENTER" prefHeight="418.0" prefWidth="600.0">
-               <children>
-                  <VBox prefHeight="383.0" prefWidth="419.0">
-                     <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="300.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" />
-                              <TextField fx:id="IDfield" promptText="ID" />
-                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="300.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date:" />
-                              <TextField fx:id="DateField" promptText="Date" />
-                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="300.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Customer:" />
-                              <TextField fx:id="CustomerField" promptText="Customer Name" />
-                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="300.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Amount:" />
-                              <TextField fx:id="AmountField" promptText="Amount" />
-                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="300.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status:" />
-                              <TextField fx:id="StatusField" promptText="Status" />
-                              <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0" />
-                     </children>
-                  </VBox>
-                  <HBox prefHeight="383.0" prefWidth="419.0">
-                     <children>
-                        <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
-                        <VBox prefHeight="383.0" prefWidth="200.0">
-                           <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Items:" />
-                              <ListView fx:id="itemListView" prefHeight="350.0" prefWidth="238.0" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
-               <children>
-                  <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
-                  <Box depth="100" height="5.0" opacity="0.0" width="5.0" />
-                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAdd" text="Add" />
-               </children>
-            </HBox>
-         </children>
+<BorderPane prefHeight="650.0"
+            prefWidth="950.0"
+            styleClass="app-root"
+            stylesheets="@style.css"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="grocerPanel.Controller.addOrderController">
+
+   <top>
+      <VBox spacing="5.0"
+            styleClass="page-header">
+
+         <Label text="Create New Order"
+                styleClass="page-title"/>
+
+         <Label text="Add customer information and select the products included in the order."
+                styleClass="page-subtitle"/>
+
       </VBox>
-   </children>
-</AnchorPane>
+   </top>
+
+   <center>
+      <HBox spacing="20.0">
+
+         <padding>
+            <Insets top="24.0"
+                    right="24.0"
+                    bottom="20.0"
+                    left="24.0"/>
+         </padding>
+
+         <VBox spacing="14.0"
+               prefWidth="380.0"
+               styleClass="card">
+
+            <Label text="Order Information"
+                   styleClass="section-title"/>
+
+            <VBox spacing="6.0">
+               <Label text="Order ID"
+                      styleClass="field-label"/>
+
+               <TextField fx:id="IDfield"
+                          promptText="Order ID"
+                          prefHeight="40.0"/>
+            </VBox>
+
+            <VBox spacing="6.0">
+               <Label text="Order Date"
+                      styleClass="field-label"/>
+
+               <TextField fx:id="DateField"
+                          promptText="YYYY-MM-DD"
+                          prefHeight="40.0"/>
+            </VBox>
+
+            <VBox spacing="6.0">
+               <Label text="Customer Name"
+                      styleClass="field-label"/>
+
+               <TextField fx:id="CustomerField"
+                          promptText="Customer name"
+                          prefHeight="40.0"/>
+            </VBox>
+
+            <VBox spacing="6.0">
+               <Label text="Order Total"
+                      styleClass="field-label"/>
+
+               <TextField fx:id="AmountField"
+                          promptText="0.00"
+                          prefHeight="40.0"/>
+            </VBox>
+
+            <VBox spacing="6.0">
+               <Label text="Status"
+                      styleClass="field-label"/>
+
+               <TextField fx:id="StatusField"
+                          promptText="Order status"
+                          prefHeight="40.0"/>
+            </VBox>
+
+         </VBox>
+
+         <VBox spacing="14.0"
+               HBox.hgrow="ALWAYS"
+               styleClass="card">
+
+            <Label text="Order Items"
+                   styleClass="section-title"/>
+
+            <Label text="Select products and enter the quantity for each item."
+                   styleClass="helper-text"/>
+
+            <ListView fx:id="itemListView"
+                      VBox.vgrow="ALWAYS"/>
+
+         </VBox>
+
+      </HBox>
+   </center>
+
+   <bottom>
+      <HBox spacing="12.0"
+            alignment="CENTER_RIGHT"
+            styleClass="page-footer">
+
+         <Button text="Cancel"
+                 prefWidth="120.0"
+                 styleClass="button-ghost"
+                 onAction="#onCancel"/>
+
+         <Button text="Create Order"
+                 prefWidth="150.0"
+                 styleClass="button-primary"
+                 onAction="#onAdd"/>
+
+      </HBox>
+   </bottom>
+
+</BorderPane>
