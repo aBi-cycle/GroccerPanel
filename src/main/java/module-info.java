@@ -3,6 +3,7 @@ module grocerPanel {
     requires javafx.fxml;
     requires java.desktop;
     requires java.sql;
+    requires org.testng;
 
 
     opens grocerPanel to javafx.fxml;
